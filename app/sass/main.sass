@@ -1,0 +1,317 @@
+@use 'sass:math'
+@use 'sass:color'
+
+@import "libs"
+@import "vars"
+
+*
+	-webkit-box-sizing: border-box
+	-moz-box-sizing: border-box
+	box-sizing: border-box
+	&:before, &:after
+		-webkit-box-sizing: border-box
+		-moz-box-sizing: border-box
+		box-sizing: border-box
+
+*::-webkit-input-placeholder
+	color: #666
+	opacity: 1
+
+*:-moz-placeholder
+	color: #666
+	opacity: 1
+
+*::-moz-placeholder
+	color: #666
+	opacity: 1
+
+*:-ms-input-placeholder
+	color: #666
+	opacity: 1
+
+body input:focus:required:invalid,
+body textarea:focus:required:invalid
+	color: #666
+body input:required:valid,
+body textarea:required:valid
+	color: #666
+
+html, body
+	height: 100%
+
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio
+	margin: 0
+	padding: 0
+	border: 0
+	font-size: 100%
+	font: inherit
+	vertical-align: baseline
+
+
+a:hover,
+a:active,
+a:focus
+	text-decoration: none
+
+ul
+	list-style: none
+
+
+body
+	font-size: 16px
+	line-height: 26px
+	position: relative
+	line-height: 1.65
+	font-family: 'Merriweather Sans', sans-serif
+	overflow-x: hidden
+	background: #edf3f9
+
+.container 
+	width: 970px
+
+.header 
+	background: #ffffff
+	&__top
+		background: #44667c
+		ul
+			display: flex
+			justify-content: end
+			align-items: center
+			li
+				width: max-content
+				font-size: 11px
+				height: 100%
+				transition: all .2s
+				&.search
+					a
+						padding: 5px 20px
+				&:hover 
+					background: #d8770e
+				a
+					display: block
+					padding: 5px 10px
+					color: #fff
+					line-height: 20px
+				img
+					width: 20px
+					height: 20px
+					display: block
+	&__bottom
+		display: flex
+		align-items: center
+		justify-content: space-between
+		padding: 20px
+		padding-bottom: 0
+		&-nav ul
+			display: flex
+			align-items: center
+			&.show
+				display: flex
+			li
+				padding: 5px 10px
+				font-size: 14px
+				font-weight: 700
+				&.external-link
+					padding-right: 30px	
+					position: relative
+					cursor: pointer
+					&::after
+						content: ''
+						background: url(../img/external-link.png)
+						background-size: contain
+						position: absolute
+						top: 50%
+						transform: translateY(-50%)
+						width: 20px
+						height: 20px
+						right: 10px
+				&.have-child
+					padding-right: 20px	
+					position: relative
+					span
+						cursor: pointer
+					&.show::after 
+						transform: rotate(180deg) translateY(50%)
+					&::after
+						content: url(../img/down-arrow.svg)
+						position: absolute
+						width: 10px
+						top: 50%
+						transform: translateY(-50%)
+						right: 5px
+						transition: all .2s
+				a
+					color: #000
+			.sublist
+				display: none
+				box-shadow: 0 0 20px rgb(0 0 0 / 15%)
+				min-width: 200px
+				border: none
+				padding: 10px
+				li a
+					color: #44667c
+	&__logo 
+		max-width: 200px
+		img
+			width: 100%
+			display: block
+	&__mob-menu
+		position: fixed
+		width: 290px
+		left: 0
+		top: 0
+		background: #44667c
+		overflow-y: auto
+		overflow-x: hidden
+		height: 100vh
+		transform: translateX(-290px)
+		transition: all .4s
+		&.show
+			transform: translateX(0)
+		ul
+			font-size: 14px
+			color: #fff
+			position: relative
+			&::after 
+				content: ' '
+				display: block
+				position: absolute
+				right: -15px
+				top: 0
+				height: 100%
+				width: 15px
+				background: 0 0
+				-webkit-box-shadow: 0 0 15px rgb(0 0 0 / 80%)
+				-moz-box-shadow: 0 0 15px rgba(0,0,0,.8)
+				-ms-box-shadow: 0 0 15px rgba(0,0,0,.8)
+				-o-box-shadow: 0 0 15px rgba(0,0,0,.8)
+				box-shadow: 0 0 15px rgb(0 0 0 / 80%)
+				z-index: 10000
+			li
+				padding: 10px 25px
+				&.orange
+					background: #d8770e
+				&.external-link
+					position: relative
+					padding-left: 60px	
+					display: flex
+					align-items: center
+					&::before
+						content: ''
+						background: url(../img/external-link.png)
+						background-size: contain
+						position: absolute
+						top: 50%
+						transform: translateY(-50%)
+						filter: invert(100)
+						width: 25px
+						height: 25px
+						left: 25px
+				&.have-child
+					padding: 0
+					span
+						position: relative
+						padding: 10px 25px
+						display: block
+						width: 100%
+						&::after
+							content: url(../img/down-arrow.svg)
+							position: absolute
+							width: 10px
+							top: 50%
+							transform: translateY(-50%)
+							right: 15px
+							transition: all .2s
+							filter: invert(100)
+					&.show
+						.sublist
+							height: max-content
+							max-height: 1000px
+							padding: 10px 25px
+							transition: all .7s
+						span
+							background: #d8770e
+							&::after
+								transform: rotate(180deg) translateY(50%)
+				.sublist
+					overflow: hidden
+					max-height: 0
+					padding: 0
+					width: 100%
+					padding-left: 25px
+					background: transparent
+					transition: all .5s
+					position: static !important
+					transform: none !important
+					float: none
+					border: none
+					padding-bottom: 0
+					display: block
+					&::after
+						display: none	
+					li
+						padding: 10px 0	
+						&:last-child
+							padding-bottom: 0				
+
+						
+			a
+				color: #fff
+	&__mob
+		background: #44667c
+		display: none
+		justify-content: space-between
+		align-items: center
+		transition: all .4s
+		&.show-menu
+			transform: translateX(290px)
+	
+		&-logo
+			img
+				display: block
+		.burger-button
+			display: flex
+			flex-direction: column
+			justify-content: space-between
+			padding: 15px
+			span
+				width: 15px
+				height: 2px
+				background: #fff
+				& + span 
+					margin-top: 3px
+		&-search
+			a
+				padding: 15px
+				display: block
+			img
+				width: 20px
+				display: block
+	
+.header__bottom-nav ul .sublist 
+	display: block
+	opacity: 0
+	visibility: hidden
+	transform: translateY(100px) !important
+	transition: all .3s
+	&.show
+		opacity: 1
+		visibility: visible
+		transform: none !important
+		top: 30px !important
+
+
+@import "media" 
