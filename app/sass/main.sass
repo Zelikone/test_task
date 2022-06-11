@@ -287,8 +287,26 @@ body
 			flex-direction: column
 			justify-content: space-between
 			padding: 15px
+			&.active
+				align-items: center
+				justify-content: center
+				span:first-child
+					position: absolute
+					transform: rotate(45deg)
+					transform-origin: center
+					margin: 0
+				span:nth-child(2)
+					opacity: 0
+					visibility: hidden
+					height: 0
+					margin: 0
+				span:last-child
+					position: absolute
+					transform: rotate(-45deg)
+					transform-origin: center
+					margin: 0
 			span
-				width: 15px
+				width: 16px
 				height: 2px
 				background: #fff
 				& + span 
